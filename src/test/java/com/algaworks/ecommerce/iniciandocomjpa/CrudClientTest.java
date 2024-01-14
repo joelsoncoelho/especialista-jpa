@@ -11,7 +11,7 @@ public class CrudClientTest extends EntityManagerTest {
     public void mostarDiferencaPersisteMerge(){
         Cliente clientePersist = new Cliente();
 
-        clientePersist.setId(5);
+        clientePersist.setId(null);
         clientePersist.setNome("Zelda");
 
         entityManager.getTransaction().begin();
@@ -28,7 +28,7 @@ public class CrudClientTest extends EntityManagerTest {
 
         Cliente clienteMerge = new Cliente();
 
-        clienteMerge.setId(6);
+        clienteMerge.setId(null);
         clienteMerge.setNome("Malala");
 
         entityManager.getTransaction().begin();
@@ -45,9 +45,9 @@ public class CrudClientTest extends EntityManagerTest {
 
     @Test
     public void inserirObjetoComMerge(){
-        Cliente cliente = new Cliente();
+        Cliente cliente = entityManager.find(Cliente.class, 3);
 
-        cliente.setId(3);
+        //cliente.setId(3);
         cliente.setNome("Cabocla dos Anjos");
 
         entityManager.getTransaction().begin();
@@ -81,8 +81,8 @@ public class CrudClientTest extends EntityManagerTest {
     @Test
     public void atualizar(){
 
-        Cliente cliente = new Cliente();
-        cliente.setId(1);
+        Cliente cliente = entityManager.find(Cliente.class, 1);
+        //cliente.setId(1);
         cliente.setNome("Patricia Poeta");
         entityManager.getTransaction().begin();
         entityManager.merge(cliente);
@@ -114,7 +114,7 @@ public class CrudClientTest extends EntityManagerTest {
     public void insert(){
         Cliente cliente = new Cliente();
 
-        cliente.setId(3);
+        //cliente.setId(3);
         cliente.setNome("Samuel L. Jackson");
 
         entityManager.getTransaction().begin();

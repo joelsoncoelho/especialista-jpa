@@ -1,6 +1,7 @@
 package com.algaworks.ecommerce.iniciandocomjpa;
 
 import com.algaworks.ecommerce.EntityManagerTest;
+import com.algaworks.ecommerce.model.Cliente;
 import com.algaworks.ecommerce.model.Produto;
 import org.junit.Assert;
 import org.junit.Test;
@@ -29,7 +30,7 @@ public class OperacoesComTransacaoTest extends EntityManagerTest {
     public void mostarDiferencaPersisteMerge(){
         Produto produtoPersist = new Produto();
 
-        produtoPersist.setId(5);
+       // produtoPersist.setId(5);
         produtoPersist.setNome("Notebook Samsung Book 2");
         produtoPersist.setDescricao("Design elegante e poderoso");
         produtoPersist.setPreco(new BigDecimal(2500));
@@ -48,7 +49,7 @@ public class OperacoesComTransacaoTest extends EntityManagerTest {
 
         Produto produtoMerge = new Produto();
 
-        produtoMerge.setId(6);
+        //produtoMerge.setId(6);
         produtoMerge.setNome("Notebook Gamer Alienware m16");
         produtoMerge.setDescricao("Máximo Desempenho Para Seu Jogo");
         produtoMerge.setPreco(new BigDecimal(5000));
@@ -69,19 +70,19 @@ public class OperacoesComTransacaoTest extends EntityManagerTest {
     public void inserirObjetoComMerge(){
         Produto produto = new Produto();
 
-        produto.setId(4);
+        //produto.setId(4);
         produto.setNome("Notebook Avell A65 ION");
         produto.setDescricao("Poderoso. Potente. Eficiente.\n" +
                 "O notebook perfeito para profissionais com rotinas eletrizantes!");
         produto.setPreco(new BigDecimal(9998.89));
 
         entityManager.getTransaction().begin();
-        entityManager.merge(produto);
+        Produto produtoSalvo =  entityManager.merge(produto);
         entityManager.getTransaction().commit();
 
         entityManager.clear(); //limpar a memória e vai no banco de novo // não muito recomendado
 
-        Produto produtoVerificacao = entityManager.find(Produto.class, produto.getId());
+        Produto produtoVerificacao = entityManager.find(Produto.class, produtoSalvo.getId());
         Assert.assertNotNull(produtoVerificacao);
 
     }
@@ -104,8 +105,8 @@ public class OperacoesComTransacaoTest extends EntityManagerTest {
     @Test
     public void atualizarObjeto(){
 
-        Produto produto = new Produto();
-        produto.setId(1);
+        Produto produto = entityManager.find(Produto.class, 1);
+        //produto.setId(1);
         produto.setNome("Notebook Gamer Lenovo Gaming 3i");
         produto.setDescricao("Preparece para uma experiência nunca vista antes.");
         produto.setPreco(new BigDecimal(3509.90));
@@ -140,7 +141,7 @@ public class OperacoesComTransacaoTest extends EntityManagerTest {
     public void inserirOPrimeiroObjeto(){
         Produto produto = new Produto();
 
-        produto.setId(2);
+        //produto.setId(2);
         produto.setNome("Notebook Gamer Dell G15");
         produto.setDescricao("Notebooks Série G NVIDIA GeForce RTX 4050");
         produto.setPreco(new BigDecimal(7699));

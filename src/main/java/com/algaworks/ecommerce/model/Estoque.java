@@ -5,26 +5,21 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
-@Getter
-@Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Setter
+@Getter
+@Table(name = "estoque")
 @Entity
-@Table(name = "cliente")
-public class Cliente {
+public class Estoque {
 
-    @Id
     @EqualsAndHashCode.Include
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String nome;
+    @OneToOne(optional = false)
+    @JoinColumn(name = "produto_id")
+    private Produto produto;
 
-    @Enumerated(EnumType.STRING)
-    private SexoCliente sexo;
-
-    @OneToMany(mappedBy = "cliente")
-    private List<Pedido> pedidos;
-
+    private Integer quantidade;
 }

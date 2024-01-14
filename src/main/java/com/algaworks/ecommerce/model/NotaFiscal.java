@@ -1,0 +1,38 @@
+package com.algaworks.ecommerce.model;
+
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Setter
+@Getter
+@Table(name = "nota_fiscal")
+@Entity
+public class NotaFiscal {
+
+    @EqualsAndHashCode.Include
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "pedido_id")
+    //funciona também da mesma forma./
+    /*
+    @JoinTable(name = "pedido_nota_fiscal",
+        joinColumns = @JoinColumn(name = "nota_fiscal_id", unique = true),
+        inverseJoinColumns = @JoinColumn(name = "pedido_id", unique = true))
+     */
+    private Pedido pedido;
+
+    private String xml;
+
+    @Column(name = "data_emissao")
+    private Date dataEmissao;
+
+}
